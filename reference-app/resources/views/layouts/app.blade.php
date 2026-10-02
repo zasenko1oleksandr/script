@@ -9,7 +9,7 @@
 
 <nav style="display: flex; justify-content: center; gap: 20px; padding: 15px;">
     <a href="{{ url('/') }}">Головна</a>
-    <a href="{{ url('/about') }}">Про застосунок</a>
+    <a href="{{ url('/about') }}">Список Літерарути</a>
     <a href="{{ url('/contact') }}">Контакти</a>
 </nav>
 
