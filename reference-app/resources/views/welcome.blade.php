@@ -7,3 +7,4 @@
     <p style="font-size: 18px; color: #555; margin-bottom: 10px;">Вебзастосунок для обліку книжкового фонду та читачів.</p>
     <p style="color: #777;">Виконав: Засенко О. Л., група РІ-п51.</p>
 @endsection
+

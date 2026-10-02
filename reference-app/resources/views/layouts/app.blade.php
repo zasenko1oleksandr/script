@@ -13,6 +13,7 @@
     <a href="{{ url('/contact') }}" style="color: #0d6efd; text-decoration: none; font-weight: bold;">Контакти</a>
 </nav>
 
+
 <main style="flex: 1; text-align: center; padding: 40px 20px;">
     @yield('content')
 </main>
