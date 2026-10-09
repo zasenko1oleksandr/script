@@ -1,53 +1,14 @@
 @extends('layouts.app')
 @section('title', 'Заявка')
 @section('content')
-    <h1>Подача заявки</h1>
-    <p>
-        На цій сторінці може бути розміщена заявка про
-        книгу, яку ви хотіли б додати.
-    </p>
-    <h1>Форма введення даних</h1>
-    <form method="POST" action="{{ route('entry.store') }}">
-        @csrf
-        <div>
-            <label for="name">Ім'я</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                value="{{ old('name') }}"
-            >
-            @error('name')
-            <p class="error">{{ $message }}</p>
-            @enderror
-        </div>
+    <div style="text-align: center; padding: 40px 0;">
+        <h1>Подача заявки</h1>
+        <p style="margin-bottom: 25px; color: #555;">
+            Натисніть кнопку нижче, щоб перейти до заповнення форми заявки на додавання книги.
+        </p>
 
-        <div>
-            <label for="email">Email</label>
-            <input
-                type="text"
-                id="email"
-                name="email"
-                value="{{ old('email') }}"
-            >
-            @error('email')
-            <p class="error">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div>
-            <label for="book_title">Назва книги</label>
-            <input
-                type="text"
-                id="book_title"
-                name="book_title"
-                value="{{ old('book_title') }}"
-            >
-            @error('book_title')
-            <p class="error">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <button type="submit">Надіслати</button>
-    </form>
+        <a href="{{ route('entry.form') }}" style="display: inline-block; padding: 12px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 6px; font-size: 16px; font-weight: bold;">
+            Подати заявку
+        </a>
+    </div>
 @endsection

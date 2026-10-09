@@ -16,6 +16,7 @@
             <p class="error">{{ $message }}</p>
             @enderror
         </div>
+
         <div>
             <label for="email">Email</label>
             <input
@@ -28,6 +29,20 @@
             <p class="error">{{ $message }}</p>
             @enderror
         </div>
+
+        <div>
+            <label for="book_title">Назва книги</label>
+            <input
+                type="text"
+                id="book_title"
+                name="book_title"
+                value="{{ old('book_title') }}"
+            >
+            @error('book_title')
+            <p class="error">{{ $message }}</p>
+            @enderror
+        </div>
+
         <button type="submit">Надіслати</button>
     </form>
 @endsection
