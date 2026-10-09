@@ -12,6 +12,10 @@
             <strong>Email:</strong>
             {{ $email }}
         </li>
+        <li>
+            <strong>Назва книги:</strong>
+            {{ $book_title }}
+        </li>
     </ul>
     <p>
         <a href="{{ route('entry.form') }}">
