@@ -30,4 +30,4 @@ class EntryRequest extends FormRequest
         ];
     }
 }
-}
+
