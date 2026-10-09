@@ -3,6 +3,7 @@
 @section('content')
     <h1>Форма введення даних</h1>
     <form method="POST" action="{{ route('entry.store') }}">
+        @csrf
         <div>
             <label for="name">Ім'я</label>
             <input
@@ -30,5 +31,5 @@
         <button type="submit">Надіслати</button>
     </form>
 @endsection
-    @csrf
+
 
