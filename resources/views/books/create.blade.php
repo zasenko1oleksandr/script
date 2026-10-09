@@ -46,7 +46,13 @@
             <p class="error" style="color: red;">{{ $message }}</p>
             @enderror
         </div>
-
+        <div style="margin-bottom: 15px;">
+            <label for="message">Повідомлення / Примітка</label>
+            <textarea id="message" name="message">{{ old('message') }}</textarea>
+            @error('message')
+            <p class="error" style="color: red;">{{ $message }}</p>
+            @enderror
+        </div>
         <button type="submit">Надіслати</button>
     </form>
 @endsection

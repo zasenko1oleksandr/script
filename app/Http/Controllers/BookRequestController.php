@@ -33,6 +33,7 @@ class BookRequestController extends Controller
             'name'       => $validated['name'],
             'email'      => $validated['email'],
             'book_title' => $validated['book_title'],
+            'message'    => $validated['message'],
         ]);
     }
 }
