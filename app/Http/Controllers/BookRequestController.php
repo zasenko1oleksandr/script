@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EntryRequest;
+use App\Models\Book;
 
 class BookRequestController extends Controller
 {
 
     public function list()
     {
-        return view('books.list');
+        $books = Book::all();
+
+        return view('books.list', compact('books'));
     }
 
 
@@ -28,6 +31,11 @@ class BookRequestController extends Controller
     public function store(EntryRequest $request)
     {
         $validated = $request->validated();
+
+
+        Book::create([
+            'title' => $validated['book_title'],
+        ]);
 
         return view('books.confirm', [
             'name'       => $validated['name'],

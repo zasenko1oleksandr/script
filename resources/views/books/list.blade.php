@@ -10,8 +10,13 @@
 
     <div style="max-width: 600px; margin: 0 auto; text-align: left; background: #ffffff; padding: 25px; border-radius: 8px; border: 1px solid #ddd;">
         <ul style="line-height: 2; margin: 0; padding-left: 20px;">
-            <li><strong>Блаблабла</strong> — Густаво</li>
-
+            @forelse($books as $book)
+                <li><strong>{{ $book->title }}</strong></li>
+            @empty
+                <li style="list-style: none; color: #777;">
+                    Список поки порожній. Подайте першу заявку!
+                </li>
+            @endforelse
         </ul>
     </div>
 @endsection
