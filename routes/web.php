@@ -27,3 +27,11 @@ Route::view(
     '/contact',
     'site.contact'
 )->name('site.contact');
+use App\Http\Controllers\BookRequestController;
+
+
+Route::prefix('book-request')->name('book-request.')->group(function () {
+    Route::get('/', [BookRequestController::class, 'index'])->name('index');
+    Route::get('/create', [BookRequestController::class, 'create'])->name('create');
+    Route::post('/', [BookRequestController::class, 'store'])->name('store');
+});
