@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\SiteController;
+use App\Http\Controllers\SiteController
 
 Route::get('/', function () {
     return view('welcome');
