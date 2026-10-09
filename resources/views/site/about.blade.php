@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Про застосунок')
+@section('title', 'Список літератури')
 @section('content')
     <h1>Списки літератури</h1>
     <p>
