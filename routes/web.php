@@ -29,8 +29,8 @@ Route::view(
 )->name('site.contact');
 use App\Http\Controllers\BookRequestController;
 
-
 Route::prefix('book-request')->name('book-request.')->group(function () {
+    Route::get('/list', [BookRequestController::class, 'list'])->name('list');
     Route::get('/', [BookRequestController::class, 'index'])->name('index');
     Route::get('/create', [BookRequestController::class, 'create'])->name('create');
     Route::post('/', [BookRequestController::class, 'store'])->name('store');

@@ -7,6 +7,12 @@ use App\Http\Requests\EntryRequest;
 class BookRequestController extends Controller
 {
 
+    public function list()
+    {
+        return view('books.list');
+    }
+
+
     public function index()
     {
         return view('books.index');
