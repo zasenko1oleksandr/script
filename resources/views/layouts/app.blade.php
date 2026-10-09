@@ -8,7 +8,7 @@
 <body style="display: flex; flex-direction: column; min-height: 100vh; margin: 0; font-family: sans-serif; background-color: #f8f9fa;">
 
 <nav style="display: flex; justify-content: center; gap: 20px; padding: 15px; background: #ffffff; border-bottom: 1px solid #ddd;">
-    <a href="{{ url('/') }}" style="color: #0d6efd; text-decoration: none; font-weight: bold;">Головна</a>
+    <a href="{{ url('/') }}" style="color: #0d6efd; text-decoration: none; font-weight: bold;">Головна сторінка</a>
     <a href="{{ url('/about') }}" style="color: #0d6efd; text-decoration: none; font-weight: bold;">Список літератури</a>
     <a href="{{ url('/contact') }}" style="color: #0d6efd; text-decoration: none; font-weight: bold;">Контакти</a>
 </nav>
