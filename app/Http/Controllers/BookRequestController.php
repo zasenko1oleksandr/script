@@ -7,7 +7,6 @@ use App\Models\Book;
 
 class BookRequestController extends Controller
 {
-
     public function list()
     {
         $books = Book::all();
@@ -15,23 +14,14 @@ class BookRequestController extends Controller
         return view('books.list', compact('books'));
     }
 
-
-    public function index()
-    {
-        return view('books.index');
-    }
-
-
     public function create()
     {
         return view('books.create');
     }
 
-
     public function store(EntryRequest $request)
     {
         $validated = $request->validated();
-
 
         Book::create([
             'title' => $validated['book_title'],
