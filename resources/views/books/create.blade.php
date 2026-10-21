@@ -1,58 +1,50 @@
 @extends('layouts.app')
 
-@section('title', 'Форма введення даних')
+@section('title', 'Додати книгу')
 
 @section('content')
-    <h1>Форма введення даних</h1>
+    <div class="container" style="padding: 20px;">
+        <h1>Додати нову книгу</h1>
 
-    <form method="POST" action="{{ route('book-request.store') }}">
-        @csrf
+        @if ($errors->any())
+            <div style="color: red; margin-bottom: 15px;">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        <div style="margin-bottom: 15px;">
-            <label for="name">Ім'я</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                value="{{ old('name') }}"
-            >
-            @error('name')
-            <p class="error" style="color: red;">{{ $message }}</p>
-            @enderror
-        </div>
+        <form method="POST" action="{{ route('books.store') }}">
+            @csrf
+            <div style="margin-bottom: 15px;">
+                <label for="title">Назва книги:</label><br>
+                <input type="text" id="title" name="title" value="{{ old('title') }}" required style="width: 100%; padding: 8px;">
+            </div>
 
-        <div style="margin-bottom: 15px;">
-            <label for="email">Email</label>
-            <input
-                type="text"
-                id="email"
-                name="email"
-                value="{{ old('email') }}"
-            >
-            @error('email')
-            <p class="error" style="color: red;">{{ $message }}</p>
-            @enderror
-        </div>
+            <div style="margin-bottom: 15px;">
+                <label for="author">Автор:</label><br>
+                <input type="text" id="author" name="author" value="{{ old('author') }}" required style="width: 100%; padding: 8px;">
+            </div>
 
-        <div style="margin-bottom: 15px;">
-            <label for="book_title">Назва книги</label>
-            <input
-                type="text"
-                id="book_title"
-                name="book_title"
-                value="{{ old('book_title') }}"
-            >
-            @error('book_title')
-            <p class="error" style="color: red;">{{ $message }}</p>
-            @enderror
-        </div>
-        <div style="margin-bottom: 15px;">
-            <label for="message">Повідомлення / Примітка</label>
-            <textarea id="message" name="message">{{ old('message') }}</textarea>
-            @error('message')
-            <p class="error" style="color: red;">{{ $message }}</p>
-            @enderror
-        </div>
-        <button type="submit">Надіслати</button>
-    </form>
+            <div style="margin-bottom: 15px;">
+                <label for="year">Рік видання:</label><br>
+                <input type="number" id="year" name="year" value="{{ old('year') }}" required style="width: 100%; padding: 8px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="pages">Кількість сторінок:</label><br>
+                <input type="number" id="pages" name="pages" value="{{ old('pages') }}" required style="width: 100%; padding: 8px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="genre">Жанр:</label><br>
+                <input type="text" id="genre" name="genre" value="{{ old('genre') }}" required style="width: 100%; padding: 8px;">
+            </div>
+
+            <button type="submit" style="padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer;">Зберегти</button>
+            <a href="{{ route('books.index') }}" style="margin-left: 10px;">Скасувати</a>
+        </form>
+    </div>
 @endsection
