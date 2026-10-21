@@ -21,7 +21,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('country.create');
     }
 
     /**
@@ -29,7 +29,10 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Country::create(
+            $request->validated()
+        );
+        return redirect()->route('country.index');
     }
 
     /**
@@ -37,7 +40,7 @@ class CountryController extends Controller
      */
     public function show(Country $country)
     {
-        //
+        return view('country.show', compact('country'));
     }
 
     /**
