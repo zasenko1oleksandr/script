@@ -20,4 +20,14 @@
             Повернутися до списку
         </a>
     </p>
+    <form
+        method="POST"
+        action="{{ route('country.destroy', $country) }}"
+    >
+        @csrf
+        @method('DELETE')
+        <button type="submit">
+            Видалити
+        </button>
+    </form>
 @endsection

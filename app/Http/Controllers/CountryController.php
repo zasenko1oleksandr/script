@@ -3,79 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use Illuminate\Http\Request;
+use App\Http\Requests\CountryRequest;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CountryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): View
     {
-        $countries = Country::query() ->orderBy('name') ->paginate(5);
+        $countries = Country::query()->orderBy('name')->paginate(5);
         return view('country.index', compact('countries'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(): View
     {
         return view('country.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(CountryRequest $request): RedirectResponse
     {
-        Country::create(
-            $request->validated()
-        );
+        Country::create($request->validated());
         return redirect()->route('country.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Country $country)
+    public function show(Country $country): View
     {
         return view('country.show', compact('country'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Country $country)
+    public function edit(Country $country): View
     {
-        //
+        return view('country.edit', compact('country'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Country $country)
+    public function update(CountryRequest $request, Country $country): RedirectResponse
     {
-        //
+        $country->update($request->validated());
+        return redirect()->route('country.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Country $country)
+    public function destroy(Country $country): RedirectResponse
     {
-        //
-    }
-    public function authorize(): bool
-    {
-        return true;
-    }
-    public function rules(): array
-    {
-        return [
-            'code' => ['required', 'string', 'size:2'],
-            'name' => ['required', 'string', 'max:52'],
-            'population' => ['required', 'integer', 'min:0'],
-        ];
+        $country->delete();
+        return redirect()->route('country.index');
     }
 }
