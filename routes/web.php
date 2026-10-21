@@ -3,6 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\BookRequestController;
+use App\Http\Controllers\CountryController;
+
+Route::resource(
+    'country',
+    CountryController::class
+);
+Route::resource('country', CountryController::class);
 
 Route::get('/', function () {
     return view('welcome');
