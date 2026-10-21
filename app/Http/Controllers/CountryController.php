@@ -12,7 +12,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $countries = Country::query() ->orderBy('name') ->paginate(5);
+        return view('country.index', compact('countries'));
     }
 
     /**
