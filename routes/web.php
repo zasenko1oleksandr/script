@@ -9,7 +9,7 @@ use App\Http\Controllers\StatsController;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware(TrackVisit::class);
+});
 
 Route::resource('books', BookController::class);
 
