@@ -6,26 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('tracker', function (Blueprint $table) {
             $table->id();
-            $table->string('page', 255);
-            $table->string('ip', 45);
-            $table->unsignedSmallInteger('status')->default(200);
-            $table->timestamp('visited_at')->useCurrent();
-            $table->index('page');
-            $table->index('visited_at');
+            $table->string('page');
+            $table->string('route_name')->nullable();
+            $table->string('ip')->nullable();
+            $table->string('method', 10)->nullable();
+            $table->integer('status_code')->nullable();
+            $table->timestamp('visited_at')->nullable();
         });
     }
 
-    /**  Reverse the migrations.*/
-
     public function down(): void
     {
-    Schema::dropIfExists('tracker');
+        Schema::dropIfExists('tracker');
     }
 };

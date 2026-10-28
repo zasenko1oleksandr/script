@@ -45,5 +45,16 @@ class StatsController extends Controller
 
         return view('stats.detail', compact('rows', 'type', 'item'));
     }
+    public function routeStats()
+    {
+        $stats = Tracker::query()
+            ->selectRaw('route_name, count(*) as hits, max(visited_at) as last_visit')
+            ->whereNotNull('route_name')
+            ->groupBy('route_name')
+            ->orderByDesc('hits')
+            ->get();
+
+        return view('stats.routes', compact('stats'));
+    }
 }
 
