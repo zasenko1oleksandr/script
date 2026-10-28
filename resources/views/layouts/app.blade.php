@@ -9,7 +9,7 @@
 
 <nav style="display: flex; justify-content: center; gap: 20px; padding: 15px; background: #ffffff; border-bottom: 1px solid #ddd;">
     <a href="{{ url('/') }}" style="color: #0d6efd; text-decoration: none; font-weight: bold;">Головна сторінка</a>
-    <a href="{{ route('books.list') }}" style="color: #0d6efd; text-decoration: none; font-weight: bold;">Список літератури</a>
+    <a href="{{ route('books.index') }}" style="color: #0d6efd; text-decoration: none; font-weight: bold;">Список літератури</a>
     <a href="{{ route('books.create') }}" style="color: #0d6efd; text-decoration: none; font-weight: bold;">Заявка</a>
 </nav>
 

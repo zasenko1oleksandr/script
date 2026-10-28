@@ -1,16 +1,55 @@
 @extends('layouts.app')
 
-@section('title', 'Заявка на книгу')
+@section('title', 'Список літератури')
 
 @section('content')
-    <div style="text-align: center; padding: 40px 0;">
-        <h1>Подача заявки</h1>
-        <p style="margin-bottom: 25px; color: #555;">
-            Натисніть кнопку нижче, щоб перейти до заповнення форми заявки на додавання книги.
-        </p>
+    <div class="container" style="padding: 20px;">
+        <h1>Список літератури</h1>
 
-        <a href="{{ route('book-request.create') }}" style="display: inline-block; padding: 12px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 6px; font-size: 16px; font-weight: bold;">
-            Подати заявку
-        </a>
+        <a href="{{ route('books.create') }}" class="btn btn-primary" style="margin-bottom: 15px; display: inline-block; padding: 6px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">Додати нову книгу</a>
+
+        <table class="table" border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <thead>
+            <tr style="background: #f2f2f2;">
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Автор</th>
+                <th>Рік</th>
+                <th>Сторінок</th>
+                <th>Жанр</th>
+                <th>Дії</th>
+            </tr>
+            </thead>
+            <tbody>
+            @forelse($books as $book)
+                <tr>
+                    <td>{{ $book->id }}</td>
+                    <td>{{ $book->title }}</td>
+                    <td>{{ $book->author }}</td>
+                    <td>{{ $book->year }}</td>
+                    <td>{{ $book->pages }}</td>
+                    <td>{{ $book->genre }}</td>
+                    <td>
+                        <a href="{{ route('books.show', $book->id) }}">Переглянути</a> |
+                        <a href="{{ route('books.edit', $book->id) }}">Редагувати</a> |
+                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Ви впевнені?')">Видалити</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7" style="text-align: center;">Список книг порожній.</td>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
+
+        <!-- Пункт 10: Пагінація -->
+        <div style="margin-top: 20px;">
+            {{ $books->links() }}
+        </div>
     </div>
 @endsection
