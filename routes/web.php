@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\BookController;
+use App\Http\Middleware\TrackVisit;
+
+
+Route::get('/', function () {
+    return view('welcome');
+})->middleware(TrackVisit::class);
 
 Route::resource('books', BookController::class);
 
@@ -11,10 +17,6 @@ Route::resource(
     'country',
     CountryController::class
 );
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get(
     '/say/{message?}',
