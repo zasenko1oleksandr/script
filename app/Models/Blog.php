@@ -31,4 +31,22 @@ class Blog extends Model
             'id'
         );
     }
+    public function translations()
+    {
+        return $this->hasMany(BlogTranslation::class, 'blog_id', 'blog_id');
+    }
+
+
+    public function getTranslatedAttribute($field)
+    {
+        $locale = request('lang', 'uk');
+
+        $translation = $this->translations->where('locale', $locale)->first();
+
+        if ($translation && !empty($translation->$field)) {
+            return $translation->$field;
+        }
+
+        return $this->$field;
+    }
 }
