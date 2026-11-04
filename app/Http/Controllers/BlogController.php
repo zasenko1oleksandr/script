@@ -13,9 +13,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::with('category', 'author')->get();
-
-
+        $blogs = Blog::with(['category', 'author'])
+            ->orderByDesc('dt_created')
+            ->paginate(6);
         return view('blog.index', compact('blogs'));
     }
 
@@ -83,5 +83,12 @@ class BlogController extends Controller
 
         return redirect()->route('blog.index')
             ->with('success', 'Запис успішно видалено!');
+    }
+    public function admin()
+    {
+        $blogs = Blog::with('category')
+            ->orderByDesc('dt_created')
+            ->paginate(10);
+        return view('blog.admin', compact('blogs'));
     }
 }

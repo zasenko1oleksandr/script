@@ -47,5 +47,9 @@ Route::middleware(TrackVisit::class)->group(function () {
     Route::get('/stats', [StatsController::class, 'pages'])->name('stats.pages');
     Route::get('/stats/detail', [StatsController::class, 'detail'])->name('stats.detail');
     Route::get('/stats/routes', [StatsController::class, 'routeStats'])->name('stats.routes');
+    Route::get(
+        '/blog/admin',
+        [BlogController::class, 'admin']
+    )->name('blog.admin');
     Route::resource('blog', BlogController::class);
 });
