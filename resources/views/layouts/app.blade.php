@@ -22,5 +22,8 @@
     <p style="margin: 0;">&copy; {{ date('Y') }} КПІ ім. Ігоря Сікорського | Виконав: Засенко О. Л., гр. РІ-п51</p>
 </footer>
 
+<a href="{{ route('stats.routes') }}" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background-color: #0d6efd; color: white; padding: 10px 18px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: background-color 0.2s;">
+    Статистика
+</a>
 </body>
 </html>
