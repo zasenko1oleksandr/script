@@ -7,6 +7,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\StatsController;
 use App\Http\Middleware\TrackVisit;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\FilterController;
 
 // Усі маршрути всередині цієї групи автоматично відстежуються трекером
 Route::middleware(TrackVisit::class)->group(function () {
@@ -52,4 +53,5 @@ Route::middleware(TrackVisit::class)->group(function () {
         [BlogController::class, 'admin']
     )->name('blog.admin');
     Route::resource('blog', BlogController::class);
+    Route::resource('filters', FilterController::class)->except(['show']);
 });
