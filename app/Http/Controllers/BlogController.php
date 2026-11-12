@@ -102,6 +102,38 @@ class BlogController extends Controller
             ->with('success', 'Запис успішно оновлено!');
     }
 
+    public function tags(Blog $blog)
+    {
+        $blog->load('filters');
+
+        return view('blog.tags', [
+            'blog' => $blog,
+            'filters' => Filter::pluck(
+                'filter_name',
+                'filter_id'
+            ),
+            'selected' => $blog->filters
+                ->pluck('filter_id')
+                ->all(),
+        ]);
+    }
+
+    public function tagsStore(Request $request, Blog $blog)
+    {
+        $data = $request->validate([
+            'filters' => ['sometimes', 'array'],
+            'filters.*' => [
+                'integer',
+                'distinct',
+                'exists:filter,filter_id',
+            ],
+        ]);
+
+        $blog->filters()->sync($data['filters'] ?? []);
+
+        return redirect()->route('blog.show', $blog);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
