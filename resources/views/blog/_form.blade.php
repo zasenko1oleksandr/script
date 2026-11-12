@@ -50,3 +50,20 @@
     <p class="error">{{ $message }}</p>
     @enderror
 </div>
+
+<div class="mb-3">
+    <label for="filters">Мітки (кількість значень)</label>
+    <select id="filters" name="filters[]" multiple>
+        @foreach ($filters as $id => $name)
+            <option
+                value="{{ $id }}"
+                @selected(in_array($id, old('filters', $selected ?? [])))
+            >
+                {{ $name }}
+            </option>
+        @endforeach
+    </select>
+    @error('filters')
+    <p class="error">{{ $message }}</p>
+    @enderror
+</div>

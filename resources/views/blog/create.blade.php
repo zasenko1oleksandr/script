@@ -13,4 +13,12 @@
             <a href="{{ route('blog.index') }}" class="btn btn-secondary mt-3">Скасувати</a>
         </form>
     </div>
+    <label for="filters">Мітки (кілька значень)</label>
+    <select id="filters" name="filters[]" multiple>
+        @foreach ($filters as $id => $name)
+            <option value="{{ $id }}"
+                @selected(in_array($id, old('filters', $selected ??
+                [])))>{{ $name }}</option>
+        @endforeach
+    </select>
 @endsection
