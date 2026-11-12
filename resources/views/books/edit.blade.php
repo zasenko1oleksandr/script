@@ -15,7 +15,14 @@
                 </ul>
             </div>
         @endif
-
+        <select name="authors[]" multiple class="form-control">
+            @foreach($authors as $author)
+                <option value="{{ $author->author_id }}"
+                    {{ $book->authors->contains($author->author_id) ? 'selected' : '' }}>
+                    {{ $author->name }}
+                </option>
+            @endforeach
+        </select>
         <form method="POST" action="{{ route('books.update', $book->id) }}">
             @csrf
             @method('PUT')
