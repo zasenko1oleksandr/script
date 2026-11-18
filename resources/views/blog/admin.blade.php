@@ -7,6 +7,64 @@
             Додати запис
         </a>
     </p>
+
+    {{-- Форма фільтрації та пошуку --}}
+    <form method="GET" action="{{ route('blog.admin') }}">
+        <label for="title">Заголовок</label>
+        <input
+            type="text"
+            id="title"
+            name="title"
+            value="{{ request('title') }}"
+            placeholder="Пошук за заголовком"
+        >
+
+        <label for="categoryName">Назва категорії</label>
+        <input
+            type="text"
+            id="categoryName"
+            name="categoryName"
+            value="{{ request('categoryName') }}"
+            placeholder="Назва категорії"
+        >
+
+        <label for="category_id">Категорія</label>
+        <select id="category_id" name="category_id">
+            <option value="">Усі категорії</option>
+            @foreach ($categories as $id => $name)
+                <option
+                    value="{{ $id }}"
+                    @selected(request('category_id') == $id)
+                >
+                    {{ $name }}
+                </option>
+            @endforeach
+        </select>
+
+        <label for="filter_id">Мітка</label>
+        <select id="filter_id" name="filter_id">
+            <option value="">Усі мітки</option>
+            @foreach ($filters as $id => $name)
+                <option
+                    value="{{ $id }}"
+                    @selected(request('filter_id') == $id)
+                >
+                    {{ $name }}
+                </option>
+            @endforeach
+        </select>
+
+        <input type="hidden" name="sort" value="{{ request('sort') }}">
+
+        <button type="submit">
+            Застосувати
+        </button>
+
+        <a href="{{ route('blog.admin') }}">
+            Скинути фільтри
+        </a>
+    </form>
+
     <table>
         <thead>
         <tr>
