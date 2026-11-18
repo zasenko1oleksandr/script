@@ -7,13 +7,20 @@ use App\Models\Author;
 use App\Http\Requests\BookRequest;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-
+use Illuminate\Http\Request;
+use App\Queries\BookQuery;
 class BookController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $books = Book::query()->orderBy('id', 'desc')->paginate(5);
-        return view('books.index', compact('books'));
+        // Отримуємо відфільтровані та відсортовані книги через Query-клас
+        $books = BookQuery::getFiltered($request);
+
+        // Отримуємо список авторів для випадаючого списку фільтра
+        $authors = Author::all();
+
+        // Повертаємо єдиний правильний результат
+        return view('books.index', compact('books', 'authors'));
     }
 
     public function create(): View

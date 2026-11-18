@@ -65,4 +65,6 @@ Route::middleware(TrackVisit::class)->group(function () {
 
     Route::resource('blog', BlogController::class);
     Route::resource('filters', FilterController::class)->except(['show']);
+    Route::get('/blog/admin', [BlogController::class, 'admin']) ->name('blog.admin');
+    Route::resource('blog', BlogController::class);
 });
