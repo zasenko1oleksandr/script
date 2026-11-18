@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'База даних бібліотеки')</title>
+    @vite([
+'resources/css/app.css',
+'resources/js/app.js'
+])
 </head>
 <body style="display: flex; flex-direction: column; min-height: 100vh; margin: 0; font-family: sans-serif; background-color: #f8f9fa;">
 

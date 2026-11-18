@@ -4,19 +4,38 @@
 
 @section('content')
     <div class="container" style="padding: 20px;">
-        <h1>Детальна інформація про книгу</h1>
+        <h1>Деталі книги</h1>
 
-        <div style="background: #f9f9f9; padding: 15px; border: 1px solid #ddd; margin-bottom: 20px; border-radius: 4px;">
-            <p><strong>ID:</strong> {{ $book->id }}</p>
-            <p><strong>Назва:</strong> {{ $book->title }}</p>
-            <p><strong>Автор:</strong> {{ $book->author }}</p>
-            <p><strong>Рік видання:</strong> {{ $book->year }}</p>
-            <p><strong>Кількість сторінок:</strong> {{ $book->pages }}</p>
-            <p><strong>Жанр:</strong> {{ $book->genre }}</p>
-            <p><strong>Створено в базі:</strong> {{ $book->created_at }}</p>
+        <div style="margin-bottom: 15px;">
+            <strong>Назва книги:</strong> {{ $book->title }}
         </div>
 
-        <a href="{{ route('books.index') }}" style="padding: 8px 15px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px;">Назад до списку</a>
-        <a href="{{ route('books.edit', $book->id) }}" style="padding: 8px 15px; background: #ffc107; color: black; text-decoration: none; border-radius: 4px; margin-left: 10px;">Редагувати</a>
+        <!-- Виведення зв'язаних авторів (N:N) -->
+        <div style="margin-bottom: 15px;">
+            <strong>Автори:</strong>
+            @if($book->authors->count() > 0)
+                <ul>
+                    @foreach($book->authors as $author)
+                        <li>{{ $author->name }}</li>
+                    @endforeach
+                </ul>
+            @else
+                <p>Авторів не вказано</p>
+            @endif
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <strong>Рік видання:</strong> {{ $book->year }}
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <strong>Кількість сторінок:</strong> {{ $book->pages }}
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <strong>Жанр:</strong> {{ $book->genre }}
+        </div>
+
+        <a href="{{ route('books.index') }}" style="padding: 8px 15px; background: #6c757d; color: white; text-decoration: none;">Назад до списку</a>
     </div>
 @endsection

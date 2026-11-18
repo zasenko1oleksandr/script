@@ -11,6 +11,16 @@
                 <strong>Дата публікації:</strong> {{ $blog->dt_created }}
             </p>
 
+            <div class="tags">
+                @forelse ($blog->filters as $filter)
+                    <span class="tag">
+    {{ $filter->filter_name }}
+    </span>
+                @empty
+                    <span>Міток немає.</span>
+                @endforelse
+            </div>
+
             <hr>
 
             <div class="blog-body">

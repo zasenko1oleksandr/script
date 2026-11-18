@@ -7,8 +7,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\StatsController;
 use App\Http\Middleware\TrackVisit;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\FilterController;
 
-// Усі маршрути всередині цієї групи автоматично відстежуються трекером
 Route::middleware(TrackVisit::class)->group(function () {
 
     Route::get('/', function () {
@@ -47,9 +47,22 @@ Route::middleware(TrackVisit::class)->group(function () {
     Route::get('/stats', [StatsController::class, 'pages'])->name('stats.pages');
     Route::get('/stats/detail', [StatsController::class, 'detail'])->name('stats.detail');
     Route::get('/stats/routes', [StatsController::class, 'routeStats'])->name('stats.routes');
+
     Route::get(
         '/blog/admin',
         [BlogController::class, 'admin']
     )->name('blog.admin');
+
+    Route::get(
+        '/blog/{blog}/tags',
+        [BlogController::class, 'tags']
+    )->name('blog.tags');
+
+    Route::post(
+        '/blog/{blog}/tags',
+        [BlogController::class, 'tagsStore']
+    )->name('blog.tags.store');
+
     Route::resource('blog', BlogController::class);
+    Route::resource('filters', FilterController::class)->except(['show']);
 });

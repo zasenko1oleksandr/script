@@ -15,7 +15,8 @@ class BookRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'author' => ['required', 'string', 'max:255'],
+            'authors' => 'required|array',
+            'authors.*' => 'exists:authors,author_id',
             'year' => ['required', 'integer', 'min:1000', 'max:2026'],
             'pages' => ['required', 'integer', 'min:1'],
             'genre' => ['required', 'string', 'max:100'],

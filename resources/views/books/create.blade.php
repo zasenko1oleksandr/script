@@ -23,9 +23,17 @@
                 <input type="text" id="title" name="title" value="{{ old('title') }}" required style="width: 100%; padding: 8px;">
             </div>
 
+
             <div style="margin-bottom: 15px;">
-                <label for="author">Автор:</label><br>
-                <input type="text" id="author" name="author" value="{{ old('author') }}" required style="width: 100%; padding: 8px;">
+                <label for="authors">Автори:</label><br>
+                <select name="authors[]" id="authors" multiple required style="width: 100%; padding: 8px; height: 120px;">
+                    @foreach($authors as $author)
+                        <option value="{{ $author->author_id }}" {{ (in_array($author->author_id, old('authors', []))) ? 'selected' : '' }}>
+                            {{ $author->name }}
+                        </option>
+                    @endforeach
+                </select>
+                <small style="color: #666;">Утримуйте Ctrl (Cmd на Mac), щоб вибрати кількох авторів.</small>
             </div>
 
             <div style="margin-bottom: 15px;">

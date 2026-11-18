@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Author;
 use App\Http\Requests\BookRequest;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -11,19 +12,22 @@ class BookController extends Controller
 {
     public function index(): View
     {
-        // Пункт 10: Реалізація пагінації (по 5 записів на сторінку)
         $books = Book::query()->orderBy('id', 'desc')->paginate(5);
         return view('books.index', compact('books'));
     }
 
     public function create(): View
     {
-        return view('books.create');
+        $authors = Author::all();
+        return view('books.create', compact('authors'));
     }
 
     public function store(BookRequest $request): RedirectResponse
     {
-        Book::create($request->validated());
+        $book = Book::create($request->safe()->except(['authors']));
+
+        $book->authors()->sync($request->input('authors', []));
+
         return redirect()->route('books.index');
     }
 
@@ -34,12 +38,17 @@ class BookController extends Controller
 
     public function edit(Book $book): View
     {
-        return view('books.edit', compact('book'));
+        $authors = Author::all();
+        return view('books.edit', compact('book', 'authors'));
     }
 
     public function update(BookRequest $request, Book $book): RedirectResponse
     {
-        $book->update($request->validated());
+
+        $book->update($request->safe()->except(['authors']));
+
+        $book->authors()->sync($request->input('authors', []));
+
         return redirect()->route('books.index');
     }
 

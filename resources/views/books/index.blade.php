@@ -13,7 +13,7 @@
             <tr style="background: #f2f2f2;">
                 <th>ID</th>
                 <th>Назва</th>
-                <th>Автор</th>
+                <th>Автори</th>
                 <th>Рік</th>
                 <th>Сторінок</th>
                 <th>Жанр</th>
@@ -25,7 +25,11 @@
                 <tr>
                     <td>{{ $book->id }}</td>
                     <td>{{ $book->title }}</td>
-                    <td>{{ $book->author }}</td>
+
+                    <td>
+                        {{ $book->authors->pluck('name')->implode(', ') }}
+                    </td>
+
                     <td>{{ $book->year }}</td>
                     <td>{{ $book->pages }}</td>
                     <td>{{ $book->genre }}</td>
@@ -47,7 +51,6 @@
             </tbody>
         </table>
 
-        <!-- Пункт 10: Пагінація -->
         <div style="margin-top: 20px;">
             {{ $books->links() }}
         </div>
