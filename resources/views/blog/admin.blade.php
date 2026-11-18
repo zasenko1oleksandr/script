@@ -11,10 +11,43 @@
         <thead>
         <tr>
             <th>№</th>
-            <th>Заголовок</th>
-            <th>Категорія</th>
+
+            {{-- Сортування за Заголовком (title) --}}
+            @php
+                $currentSort = request('sort');
+                $nextSortTitle = $currentSort === 'title' ? '-title' : 'title';
+            @endphp
+            <th>
+                <a href="{{ route('blog.admin', array_merge(request()->except('sort', 'page'), ['sort' => $nextSortTitle])) }}">
+                    Заголовок
+                    @if ($currentSort === 'title') ↑ @elseif ($currentSort === '-title') ↓ @endif
+                </a>
+            </th>
+
+            {{-- Сортування за Категорією (categoryName) --}}
+            @php
+                $nextSortCategory = $currentSort === 'categoryName' ? '-categoryName' : 'categoryName';
+            @endphp
+            <th>
+                <a href="{{ route('blog.admin', array_merge(request()->except('sort', 'page'), ['sort' => $nextSortCategory])) }}">
+                    Категорія
+                    @if ($currentSort === 'categoryName') ↑ @elseif ($currentSort === '-categoryName') ↓ @endif
+                </a>
+            </th>
+
             <th>Мітки</th>
-            <th>Дата</th>
+
+            {{-- Сортування за Датою (created / date) --}}
+            @php
+                $nextSortDate = $currentSort === 'created' ? '-created' : 'created';
+            @endphp
+            <th>
+                <a href="{{ route('blog.admin', array_merge(request()->except('sort', 'page'), ['sort' => $nextSortDate])) }}">
+                    Дата
+                    @if ($currentSort === 'created') ↑ @elseif ($currentSort === '-created') ↓ @endif
+                </a>
+            </th>
+
             <th>Дії</th>
         </tr>
         </thead>
