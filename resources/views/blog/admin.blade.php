@@ -8,7 +8,6 @@
         </a>
     </p>
 
-    {{-- Форма фільтрації та пошуку --}}
     <form method="GET" action="{{ route('blog.admin') }}">
         <label for="title">Заголовок</label>
         <input
@@ -70,7 +69,6 @@
         <tr>
             <th>№</th>
 
-            {{-- Сортування за Заголовком (title) --}}
             @php
                 $currentSort = request('sort');
                 $nextSortTitle = $currentSort === 'title' ? '-title' : 'title';
@@ -82,7 +80,6 @@
                 </a>
             </th>
 
-            {{-- Сортування за Категорією (categoryName) --}}
             @php
                 $nextSortCategory = $currentSort === 'categoryName' ? '-categoryName' : 'categoryName';
             @endphp
@@ -95,7 +92,6 @@
 
             <th>Мітки</th>
 
-            {{-- Сортування за Датою (created / date) --}}
             @php
                 $nextSortDate = $currentSort === 'created' ? '-created' : 'created';
             @endphp

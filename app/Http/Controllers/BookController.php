@@ -13,13 +13,10 @@ class BookController extends Controller
 {
     public function index(Request $request): View
     {
-        // Отримуємо відфільтровані та відсортовані книги через Query-клас
         $books = BookQuery::getFiltered($request);
 
-        // Отримуємо список авторів для випадаючого списку фільтра
         $authors = Author::all();
 
-        // Повертаємо єдиний правильний результат
         return view('books.index', compact('books', 'authors'));
     }
 

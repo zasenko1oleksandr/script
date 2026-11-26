@@ -10,7 +10,6 @@
             <strong>Назва книги:</strong> {{ $book->title }}
         </div>
 
-        <!-- Виведення зв'язаних авторів (N:N) -->
         <div style="margin-bottom: 15px;">
             <strong>Автори:</strong>
             @if($book->authors->count() > 0)

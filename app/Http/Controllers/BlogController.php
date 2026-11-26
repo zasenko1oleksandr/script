@@ -20,7 +20,7 @@ class BlogController extends Controller
             'filter' => [
                 'nullable',
                 'integer',
-                'exists:filters,filter_id', // Виправлено з filter на filters
+                'exists:filters,filter_id',
             ],
         ]);
 
