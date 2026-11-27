@@ -13,13 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Створення тестового користувача (за бажанням можна залишити)
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
-        // Виклик нашого сідера для книг
         $this->call([
             BookSeeder::class,
         ]);

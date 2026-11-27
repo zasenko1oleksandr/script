@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Filter;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
+use App\Queries\BlogFilter;
 
 class BlogController extends Controller
 {
@@ -19,7 +20,7 @@ class BlogController extends Controller
             'filter' => [
                 'nullable',
                 'integer',
-                'exists:filter,filter_id',
+                'exists:filters,filter_id',
             ],
         ]);
 
@@ -151,7 +152,7 @@ class BlogController extends Controller
             'filters.*' => [
                 'integer',
                 'distinct',
-                'exists:filter,filter_id',
+                'exists:filters,filter_id',
             ],
         ]);
 
@@ -171,11 +172,30 @@ class BlogController extends Controller
             ->with('success', 'Запис успішно видалено!');
     }
 
-    public function admin()
+    public function admin(Request $request, BlogFilter $filter)
     {
-        $blogs = Blog::with('category')
-            ->orderByDesc('dt_created')
-            ->paginate(10);
-        return view('blog.admin', compact('blogs'));
+        $input = $request->validate([
+            'title' => ['nullable', 'string', 'max:200'],
+            'categoryName' => ['nullable', 'string', 'max:100'],
+            'category_id' => [
+                'nullable',
+                'integer',
+                'exists:categories,category_id',
+            ],
+            'filter_id' => [
+                'nullable',
+                'integer',
+                'exists:filters,filter_id',
+            ],
+            'sort' => ['nullable', 'string', 'max:30'],
+        ]);
+
+        $blogs = $filter->apply($input)->paginate(10)->withQueryString();
+
+        return view('blog.admin', [
+            'blogs' => $blogs,
+            'categories' => Category::orderBy('category_name')->pluck('category_name', 'category_id'),
+            'filters' => Filter::orderBy('filter_name')->pluck('filter_name', 'filter_id'),
+        ]);
     }
 }
