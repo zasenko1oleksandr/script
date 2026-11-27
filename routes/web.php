@@ -66,4 +66,5 @@ Route::middleware(TrackVisit::class)->group(function () {
     Route::resource('filters', FilterController::class)->except(['show']);
     Route::get('/blog/admin', [BlogController::class, 'admin']) ->name('blog.admin');
     Route::resource('blog', BlogController::class);
+    require __DIR__ . '/auth.php';
 });
